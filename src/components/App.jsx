@@ -6,6 +6,11 @@ import { Container } from './Container/Container.styled';
 import { ContactCreationForm } from './ContactCreationForm/ContactCreationForm';
 import { ContactsList } from './ContactsList/ContactsList';
 
+const INITIAL_STATE = {
+  contacts: [],
+  filter: '',
+};
+
 export class App extends Component {
   state = {
     contacts: [],
@@ -37,6 +42,7 @@ export class App extends Component {
     form.reset();
   };
 
+  //--- Event Handlers ---//
   handleChange = e => {
     const input = e.currentTarget;
 
@@ -58,6 +64,20 @@ export class App extends Component {
       ),
     });
   };
+
+  //--- Life Cycle ---//
+  componentDidMount() {
+    this.setState({
+      contacts:
+        JSON.parse(localStorage.getItem('contacts')) || this.state.contacts,
+    });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   render() {
     return (
       <>
