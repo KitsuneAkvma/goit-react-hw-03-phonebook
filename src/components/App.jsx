@@ -6,11 +6,6 @@ import { Container } from './Container/Container.styled';
 import { ContactCreationForm } from './ContactCreationForm/ContactCreationForm';
 import { ContactsList } from './ContactsList/ContactsList';
 
-const INITIAL_STATE = {
-  contacts: [],
-  filter: '',
-};
-
 export class App extends Component {
   state = {
     contacts: [],
